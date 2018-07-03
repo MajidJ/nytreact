@@ -1,0 +1,23 @@
+{
+  "name": "nytreact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taxlife/nytreact.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Taxlife/nytreact/issues"
+  },
+  "homepage": "https://github.com/Taxlife/nytreact#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
