@@ -4,6 +4,7 @@ import './App.css';
 import Articles from "./pages/Articles";
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
