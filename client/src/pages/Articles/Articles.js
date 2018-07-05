@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import { Input, FormBtn } from "../../components/Form";
+
 class Articles extends Component {
     state = {
         savedArticles: [],
         searchedArticles: [], 
+        searchInput: '',
+        startYear: '',
+        endYear: '',
     };
 
     componentDidMount() {
@@ -12,6 +17,7 @@ class Articles extends Component {
     }
 
     loadSearchedArticles = (searchField) => {
+        this.setState({searchedArticles: []});
         API.searchArticles(searchField)
         .then(res => {
             res.data.response.docs.forEach(nytArticle => {
@@ -33,10 +39,49 @@ class Articles extends Component {
         .then(res => this.setState({ savedArticles: res.data }))
         .catch(err => console.log(err));
     };
+    
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    }
+    
+    handleFormSubmit = event => {
+        event.preventDefault();
+        if (this.state.searchInput) {
+            this.loadSearchedArticles(this.state.searchInput)
+        }
+    };
 
     render() {
         return (
             <div>
+                <form>
+                    <Input
+                        value={this.state.searchInput}
+                        onChange={this.handleInputChange}
+                        name="searchInput"
+                        placeholder="Search (required)"
+                    />
+                    <Input
+                        value={this.state.startYear}
+                        onChange={this.handleInputChange}
+                        name="startYear"
+                        placeholder="Start Year"
+                    />
+                    <Input
+                        value={this.state.endYear}
+                        onChange={this.handleInputChange}
+                        name="endYear"
+                        placeholder="End Year"
+                    />
+                    <FormBtn
+                        disabled={!(this.state.searchInput)}
+                        onClick={this.handleFormSubmit}>
+                        Search
+                    </FormBtn>
+                </form>
                 <h1>Searched Articles On My List</h1>
                 {this.state.searchedArticles.length ? (
                     <ul>
