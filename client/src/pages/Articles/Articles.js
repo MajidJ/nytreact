@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { Input, FormBtn } from "../../components/Form";
+import SaveBtn from "../../components/SaveBtn";
+import DeleteBtn from "../../components/DeleteBtn";
 
 class Articles extends Component {
     state = {
@@ -54,6 +56,13 @@ class Articles extends Component {
         }
     };
 
+    handleSaveSubmit = event => {
+        event.preventDefault();
+        if (this.state.searchInput) {
+            this.loadSearchedArticles(this.state.searchInput)
+        }
+    };
+
     render() {
         return (
             <div>
@@ -87,11 +96,12 @@ class Articles extends Component {
                     <ul>
                     {this.state.searchedArticles.map((searchedArticle,index) => (
                         <li key={"searchedArticle-" + index}>
-                        <a href={"/articles/" + searchedArticle._id}>
-                            <strong>
-                            {searchedArticle.title}, {searchedArticle.date}
-                            </strong>
-                        </a>
+                            <a href={"/articles/" + searchedArticle._id}>
+                                <strong>
+                                {searchedArticle.title}, {searchedArticle.date}
+                                </strong>
+                            </a>
+                            <SaveBtn onClick={() => {API.saveArticle(this.state.searchedArticles[index])}} />
                         </li>
                     ))}
                     </ul>
@@ -103,11 +113,12 @@ class Articles extends Component {
                     <ul>
                     {this.state.savedArticles.map(savedArticle => (
                         <li key={savedArticle._id}>
-                        <a href={"/articles/" + savedArticle._id}>
-                            <strong>
-                            {savedArticle.title}, {savedArticle.date}
-                            </strong>
-                        </a>
+                            <a href={"/articles/" + savedArticle._id}>
+                                <strong>
+                                {savedArticle.title}, {savedArticle.date}
+                                </strong>
+                            </a>
+                            <DeleteBtn onClick={() => {API.deleteArticle(savedArticle._id)}} />
                         </li>
                     ))}
                     </ul>
