@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes); 
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/nytreact");
+mongoose.connect(process.env.MONGOLAB_ORANGE_URI || "mongodb://localhost:27017/nytreact");
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
