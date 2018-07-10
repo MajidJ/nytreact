@@ -4,7 +4,7 @@ export default {
   searchArticles: function(searchField) {
     let beginYear = 2018;
     let endYear = 2018;
-    let queryURL = `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchField}&facet_field=source&begin_date=${beginYear}0101&end_date=${endYear}1231&api-key=7ed0a22d92cc4cd9b5fd37efbca49ff9`;
+    let queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchField}&facet_field=source&begin_date=${beginYear}0101&end_date=${endYear}1231&api-key=7ed0a22d92cc4cd9b5fd37efbca49ff9`;
     return axios.get(queryURL);
   },
   // Gets all articles
